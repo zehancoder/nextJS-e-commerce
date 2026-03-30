@@ -1,26 +1,202 @@
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-monserrat: "Montserrat", sans-serif;
+}
+@theme {
+  --breakpoint-sm2: 470px;
+}
+html.lenis {
+  height: auto;
+}
+/* overlay div */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* dark transparent */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* controll smooth scrolling */
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+body {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  overflow-x: hidden;
+}
+/* nav links */
+.navberLinks {
+  @apply font-semibold text-[14px] z-40 transition duration-200 hover:text-[#CC0D39] md:text-[15px] font-monserrat text-gray-700;
+}
+/* nav animate */
+.nav-animation {
+  animation-name: navAnimate;
+  animation-duration: 0.4s;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes navAnimate {
+  from {
+    top: -250px;
+  }
+  to {
+    top: 0px;
   }
 }
+.activeSlider {
+  transform: scale(1.1);
+}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* rorate animation stars */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.star {
+  animation: rotate 9s linear infinite;
+}
+
+/* shapes box */
+.leftShape {
+  --mask:
+    radial-gradient(57.88px at 79.5px 50%, #000 99%, #0000 101%) 0
+      calc(50% - 60px)/100% 120px,
+    radial-gradient(57.88px at -49.5px 50%, #0000 99%, #000 101%) 30px 50%/100%
+      120px repeat-y;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+}
+.rightShape {
+  --mask:
+    radial-gradient(57.88px at calc(100% - 79.5px) 50%, #000 99%, #0000 101%) 0
+      calc(50% - 60px)/100% 120px,
+    radial-gradient(57.88px at calc(100% + 49.5px) 50%, #0000 99%, #000 101%)
+      calc(100% - 30px) 50%/100% 120px repeat-y;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+}
+
+.icon-parent:hover .icon {
+  fill: black;
+}
+
+/* add to cart btn */
+
+/* From Uiverse.io by faizanullah1999 */
+.primary-button {
+  font-family: "Ropa Sans", sans-serif;
+  /* font-family: 'Valorant', sans-serif; */
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.05rem;
+  border: 1px solid #0e1822;
+  padding: 8px 14px;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 531.28 200'%3E%3Cdefs%3E%3Cstyle%3E .shape %7B fill: %23FF4655 /* fill: %230E1822; */ %7D %3C/style%3E%3C/defs%3E%3Cg id='Layer_2' data-name='Layer 2'%3E%3Cg id='Layer_1-2' data-name='Layer 1'%3E%3Cpolygon class='shape' points='415.81 200 0 200 115.47 0 531.28 0 415.81 200' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+  background-color: #0e1822;
+  background-size: 200%;
+  background-position: 200%;
+  background-repeat: no-repeat;
+  transition: 0.3s ease-in-out;
+  transition-property: background-position, border, color;
+  position: relative;
+  z-index: 1;
+}
+
+.primary-button:hover {
+  border: 1px solid #ff4655;
+  color: white;
+  background-position: 40%;
+}
+
+.primary-button:before {
+  content: "";
+  position: absolute;
+  background-color: #0e1822;
+  width: 0.2rem;
+  height: 0.2rem;
+  top: -1px;
+  left: -1px;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.primary-button:hover:before {
+  background-color: white;
+}
+
+.primary-button:hover:after {
+  background-color: white;
+}
+
+.primary-button:after {
+  content: "";
+  position: absolute;
+  background-color: #ff4655;
+  width: 0.3rem;
+  height: 0.3rem;
+  bottom: -1px;
+  right: -1px;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.button-borders {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
+
+.button-borders:before {
+  content: "";
+  position: absolute;
+  width: calc(100% + 0.5em);
+  height: 50%;
+  left: -0.3em;
+  top: -0.3em;
+  border: 1px solid #0e1822;
+  border-bottom: 0px;
+  /* opacity: 0.3; */
+}
+
+.button-borders:after {
+  content: "";
+  position: absolute;
+  width: calc(100% + 0.5em);
+  height: 50%;
+  left: -0.3em;
+  bottom: -0.3em;
+  border: 1px solid #0e1822;
+  border-top: 0px;
+  /* opacity: 0.3; */
+  z-index: 0;
+}
+
+.shape {
+  fill: #0e1822;
+}
+.addToCart {
+  transform: translateY(100px);
+  transition: all 0.3s;
+}
+.productOverlay {
+  pointer-events: auto;
+}
+
+.addToCart {
+  pointer-events: auto;
+}
+
+.productOverlay:hover .addToCart {
+  transform: translateY(0px);
+}
+.productOverlay:hover .productImg {
+  transform: translateY(-15px);
 }
