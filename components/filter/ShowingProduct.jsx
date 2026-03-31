@@ -15,7 +15,8 @@ function ShowingProduct({ categories, text }) {
   const [data, setData] = useState([]);
   const [filterbyCategoryData, setFilterByCategoryData] = useState([]);
   const category = useSelector((state) => state.selectedCategory);
-  // data fatching by category;
+
+  // fetch data by category;
   const fetchFunc = async () => {
     const results = await Promise.all(
       categories.map((cate) => fetchProduct(cate)),
@@ -28,8 +29,8 @@ function ShowingProduct({ categories, text }) {
     fetchFunc();
   }, [categories]);
 
+  // filter data by category
   const allProducts = useSelector((state) => state.products);
-  // change data by category
   useEffect(() => {
     if (category === "All") {
       setFilterByCategoryData(allProducts);
@@ -42,8 +43,8 @@ function ShowingProduct({ categories, text }) {
       setFilterByCategoryData(afterFilter);
     }
   }, [allProducts, category]);
-  // geeting max price min price
 
+  // filter data by price
   const [maxPrice, setMaxPrice] = useState(0);
   const [minPrice, setMinPrice] = useState(0);
   useEffect(() => {
@@ -70,10 +71,7 @@ function ShowingProduct({ categories, text }) {
   useEffect(() => {
     dispatch(hightPriceState(maxPrice));
   }, [maxPrice]);
-
-  // add filter by price functionality
   const filterByPrice = useSelector((state) => state.filterByPrice);
-
   useEffect(() => {
     const finalItem = filterbyCategoryData.filter((item) => {
       if (
@@ -91,7 +89,7 @@ function ShowingProduct({ categories, text }) {
   // filter hiding
   const [isOnFilter, setIsOnFilter] = useState(false);
 
-  // show data with loading system;
+  // show data with load more system;
   const [loadData, setLoadData] = useState(15);
   const loadDataFunc = () => {
     if (loadData !== data.length) {
@@ -176,11 +174,13 @@ function ShowingProduct({ categories, text }) {
                     })}
             </div>
 
-           {data.length > 15 && <div className=" w-full md:mt-8 mt-6 lg:mt-12 flex items-center justify-center">
-              <div className="button-borders " onClick={() => loadDataFunc()}>
-                <button className="primary-button">Load more</button>
+            {data.length > 15 && (
+              <div className=" w-full md:mt-8 mt-6 lg:mt-12 flex items-center justify-center">
+                <div className="button-borders " onClick={() => loadDataFunc()}>
+                  <button className="primary-button">Load more</button>
+                </div>
               </div>
-            </div>}
+            )}
           </div>
         </div>
       </div>

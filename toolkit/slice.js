@@ -9,6 +9,7 @@ const initialState = {
     highPrice: 0,
   },
   products: [],
+  cartProduct: [],
 };
 
 export const reduxSlice = createSlice({
@@ -36,6 +37,10 @@ export const reduxSlice = createSlice({
     },
     productsSaveState: (state, action) => {
       state.products = action.payload;
+    },
+    // cart product state
+    cartProductState: (state, action) => {
+      state.cartProduct.push(action.payload);
     }
   },
 });

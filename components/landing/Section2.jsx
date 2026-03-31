@@ -10,6 +10,7 @@ import {
 
 function Section2() {
   const [products, setProducts] = useState([]);
+  // fetching products for slider
   const fetchFunc = async () => {
     const [shirts, shoes, watches, womenWatch, womenDress] = await Promise.all([
       fetchProduct("mens-shirts"),

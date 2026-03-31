@@ -136,7 +136,7 @@ function Navber() {
                       <Link href={'/shop-now/'+title.toLowerCase().replace(/&/g, "and").replace(/\s+/g, "-")}
                         className={`py-2 hover:text-[#FF6C00] rounded-[6px] text-lg font-semibold  ${
                           location.pathname.split("/")[2] ===
-                          title.toLowerCase().split(" ").join("")
+                          title.toLowerCase().replace(/&/g, "and").replace(/\s+/g, "-")
                             ? " text-[#FF6C00]"
                             : "  text-gray-700"
                         }`}
