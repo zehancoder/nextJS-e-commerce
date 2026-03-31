@@ -10,9 +10,10 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useDispatch } from "react-redux";
 function ProductCard({ discount, price, title, img, ProductId }) {
   const dispath = useDispatch();
+  
   return (
-    <div className=" relative  h-full productOverlay">
-      <div className=" absolute top-3 z-30 left-3 rounded-full bg-white px-2.5 py-1 text-[12px] font-semibold">
+    <div className=" relative font-mono py-4 h-full productOverlay">
+      <div className=" absolute top-3 z-20 left-3 rounded-full bg-white px-2.5 py-1 text-[12px] font-semibold">
         GET ${discount}% OFF
       </div>
       <div className="transition pb-3 overflow-y-hidden relative ">
@@ -26,7 +27,7 @@ function ProductCard({ discount, price, title, img, ProductId }) {
         </div>
       </div>
       <div className="absolute top-4 z-30 right-4">
-        <div className="px-2  py-[7px] z-30 transition duration-300 text-white hover:bg-[#E06161] rounded-full bg-[#0000004d] cursor-pointer">
+        <div className="px-2  py-[7px] z-20 transition duration-300 text-white hover:bg-[#E06161] rounded-full bg-[#0000004d] cursor-pointer">
           {false ? (
             <FaHeart className="font-semibold text-lg md:text-[17px] " />
           ) : (
@@ -46,10 +47,10 @@ function ProductCard({ discount, price, title, img, ProductId }) {
       </div>
 
       <div className="flex  justify-center gap-2  px-2">
-        <h1 className=" md:text-[16px] w-[90%] text-[15px] font-semibold lg:text-lg">
+        <h1 className=" md:text-[16px] leading-5 w-[90%] text-[15px] font-semibold lg:text-lg">
           {title}
         </h1>
-        <p className="text-lg font-semibold">${price}</p>
+        <p className=" md:text-[17px] sm2:text-base text-[15px] lg:text-lg font-semibold">${price}</p>
       </div>
     </div>
   );

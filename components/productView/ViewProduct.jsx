@@ -20,9 +20,9 @@ function ViewProduct() {
     }
   }, [products]);
   const [selectedImg, setSelectedImg] = useState("");
-
   return (
-    data !== null && (
+    products &&
+    data && (
       <div className=" fixed z-50 top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] w-[90%] sm2:max-w-[400px] lg:max-w-[400px] xl:max-w-[500px] ">
         <div
           className=" w-full p-2  relative"
@@ -36,13 +36,18 @@ function ViewProduct() {
           <div className="border border-gray-300 p-2 rounded-lg">
             <div className={"w-full px-4 py-3 rounded-lg bg-white"}>
               <div className=" md:w-[60%] sm2:w-[60%] w-[50%] lg:w-[70%] mx-auto overflow-hidden px-2 md:px-4 py-2 md:py-4 relative">
-                <img className="w-full " src={selectedImg || data.images[0]} alt="" />
+                <img
+                  className="w-full "
+                  src={selectedImg || data.images[0]}
+                  alt=""
+                />
               </div>
               <div className="flex justify-between">
                 <div className="w-[70%] md:w-[65%] border-r border-gray-400">
                   <div className="flex items-center flex-wrap gap-2">
                     {data.images.map((product, idx) => (
                       <div
+                        key={idx}
                         onClick={() => setSelectedImg(data.images[idx])}
                         className={`w-[25%] md:w-[21%] px-1 py-2 cursor-pointer border-[0.6px] transition duration-300 hover:border-[#FF6C00] rounded ${selectedImg === product ? "border-[#FF6C00]" : "border-[#282828]"}`}
                       >
@@ -99,7 +104,7 @@ function ViewProduct() {
             onClick={() => {
               dispath(viewProductState(null));
               setData(null);
-              setSelectedImg('')
+              setSelectedImg("");
             }}
             className=" absolute top-5 right-5 text-2xl md:text-3xl font-medium text-gray-700 hover:bg-[#FF6C00] hover:text-white rounded-full cursor-pointer transition duration-300"
           >

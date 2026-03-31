@@ -8,7 +8,7 @@ const initialState = {
     lowPrice: 0,
     highPrice: 0,
   },
-  electronicsProduct: [],
+  products: [],
 };
 
 export const reduxSlice = createSlice({
@@ -17,7 +17,7 @@ export const reduxSlice = createSlice({
   reducers: {
     // view product state
     viewProductState: (state, action) => {
-      state.viewProduct = action.payload;
+      state.viewProduct = action.payload;      
     },
     // populer data state
     populerDataState: (state, action) => {
@@ -34,8 +34,8 @@ export const reduxSlice = createSlice({
     hightPriceState: (state, action) => {
       state.filterByPrice.highPrice = action.payload;
     },
-    electronicsProductState: (state, action) => {
-      state.electronicsProduct = action.payload;
+    productsSaveState: (state, action) => {
+      state.products = action.payload;
     }
   },
 });
@@ -47,6 +47,6 @@ export const {
   selectedCategoryState,
   lowPriceState,
   hightPriceState,
-  electronicsProductState
+  productsSaveState
 } = reduxSlice.actions;
 export default reduxSlice.reducer;

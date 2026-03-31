@@ -42,7 +42,7 @@ function Products() {
         }
       },
       {
-        threshold: 0.3,
+        threshold: 0.07,
       },
     );
 

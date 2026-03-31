@@ -88,7 +88,6 @@ function Navber() {
       ],
     },
   ];
-
   const [showNow, setShopNow] = useState(false)
 
   return (
@@ -135,7 +134,7 @@ function Navber() {
                   return (
                     <div key={id}>
                       <Link href={'/shop-now/'+title.toLowerCase().replace(/&/g, "and").replace(/\s+/g, "-")}
-                        className={`py-2 rounded-[6px] text-lg font-semibold  ${
+                        className={`py-2 hover:text-[#FF6C00] rounded-[6px] text-lg font-semibold  ${
                           location.pathname.split("/")[2] ===
                           title.toLowerCase().split(" ").join("")
                             ? " text-[#FF6C00]"

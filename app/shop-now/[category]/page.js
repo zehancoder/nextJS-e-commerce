@@ -1,15 +1,12 @@
-import FilterSide from '@/components/filter/FilterSide';
-import React from 'react'
+import FilterSide from "@/components/filter/FilterSide";
+import Client from "./Client";
 
-async function page({params}) {
-  const category = await params
-  console.log(category.category);
-  
+function page({ params }) {
   return (
-    <div className=' max-w-[400px]'>
-      <FilterSide/>
+    <div className=" max-w-[1800px] px-2 py-12 bg-[#FFFAF3] mx-auto">
+      <Client params={params} />
     </div>
-  )
+  );
 }
 
-export default page
+export default page;
