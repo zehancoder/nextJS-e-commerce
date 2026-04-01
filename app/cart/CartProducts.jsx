@@ -45,7 +45,10 @@ function CartProducts() {
               <div>
                 {[...cartProduct].reverse().map((product, idx) => {
                   return (
-                    <div key={idx} className="flex border px-3 py-3 rounded-lg border-gray-400 gap-4 mt-3 max-sm:flex-col">
+                    <div
+                      key={idx}
+                      className="flex border px-3 py-3 rounded-lg border-gray-400 gap-4 mt-3 max-sm:flex-col"
+                    >
                       <div className="w-24 h-24 shrink-0 bg-white p-2 rounded-md">
                         <img
                           src={product.images[0]}
@@ -237,7 +240,7 @@ function CartProducts() {
               Discount{" "}
               <span className="ml-auto font-semibold text-slate-900">
                 {Math.floor(
-                  totalPrice < 1000  
+                  totalPrice < 1000
                     ? 3
                     : totalPrice > 1000 && totalPrice < 10000
                       ? 8
@@ -260,17 +263,14 @@ function CartProducts() {
               <span className="ml-auto font-semibold">
                 {Math.floor(
                   totalPrice < 500
-                    ? totalPrice -
-                        totalPrice -
-                        totalPrice * (3 / 100) +
-                        cartProduct.length
+                    ? totalPrice - totalPrice * (3 / 100) + cartProduct.length
                     : totalPrice > 1000 && totalPrice < 10000
                       ? totalPrice - totalPrice * (8 / 100) + cartProduct.length
                       : totalPrice > 10000
                         ? totalPrice -
                           totalPrice * (10 / 100) +
                           cartProduct.length
-                        : 0,
+                        : totalPrice,
                 )}
               </span>
             </li>
