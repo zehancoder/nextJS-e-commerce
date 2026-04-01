@@ -2,11 +2,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { IoSearchOutline } from "react-icons/io5";
+import { IoClose, IoSearchOutline } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
 import { IoCartSharp } from "react-icons/io5";
 import logo from "@/public/images/logo.svg";
 import { useSelector } from "react-redux";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+
 function Navber() {
   const [scroll, setScroll] = useState(0);
   //
@@ -89,8 +91,8 @@ function Navber() {
       ],
     },
   ];
-  const [showNow, setShopNow] = useState(false)
-  const cartProduct = useSelector(state => state.cartProduct)
+  const [showNow, setShopNow] = useState(false);
+  const cartProduct = useSelector((state) => state.cartProduct);
   return (
     <div
       className={` w-[100%]  h-20  rounded-b-lg z-40 fixed  ${scroll > 0 && " nav-animation  top-0 left-0"}`}
@@ -98,11 +100,11 @@ function Navber() {
       <div
         className={`py-3 w-full px-5 flex h-full border-b border-gray-300 items-center justify-between md:gap-4 gap-4 lg:gap-6 mx-auto max-w-[1800px] ${scroll > 0 ? "bg-[#fff]" : "bg-[#FFFAF3]"}`}
       >
-        <div className="w-[100px]">
+        <Link href={"/"} className="w-[100px]">
           <Image alt="logo" width={"100%"} height={"100%"} src={logo} />
-        </div>
+        </Link>
         {/* nav links */}
-        <nav className=" hidden lg:flex items-center md:gap-6 sm:gap-4 gap-2 lg:gap-8 justify-between">
+        <nav className=" lg:static top-0 left-0 z-50 fixed bg-white w-screen h-screen lg:h-auto lg:w-auto lg:flex items-center space-y-4 px-8 py-8 lg:gap-8 justify-between">
           <Link href={"/"} className="navberLinks flex items-center gap-0.5">
             Home
             <Image
@@ -113,67 +115,94 @@ function Navber() {
             />
           </Link>
           <div className=" relative">
-            <Link href={'/shop-now'}
-              onMouseOver={() => setShopNow(true)}
-              className="navberLinks cursor-default cursor-pointer flex items-center gap-0.5"
-            >
-              Shop Now
-              <Image
-                alt="star"
-                width={10}
-                height={10}
-                src={`data:image/svg+xml,%3csvg%20width='12'%20height='12'%20viewBox='0%200%2012%2012'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6%200L7.69706%204.30294L12%206L7.69706%207.69706L6%2012L4.30294%207.69706L0%206L4.30294%204.30294L6%200Z'%20fill='black'%20fill-opacity='0.4'/%3e%3c/svg%3e`}
-              />
-            </Link>
-
-            {showNow && <div
-              onMouseLeave={() => setShopNow(false)}
-              className=" fixed z-40 shadow-lg lg:w-4xl md:w-3xl w-full xl:w-5xl top-[8%] font-lexend text-[15px] left-[50%] -translate-x-[50%]"
-            >
-              <div className="px-3 py-4 grid grid-cols-5  rounded-lg bg-[#FFFAF3] text-gray-700">
-                {shopMenu.map(({ id, title, items }) => {
-                  return (
-                    <div key={id}>
-                      <Link href={'/shop-now/'+title.toLowerCase().replace(/&/g, "and").replace(/\s+/g, "-")}
-                        className={`py-2 hover:text-[#FF6C00] rounded-[6px] text-lg font-semibold  ${
-                          location.pathname.split("/")[2] ===
-                          title.toLowerCase().replace(/&/g, "and").replace(/\s+/g, "-")
-                            ? " text-[#FF6C00]"
-                            : "  text-gray-700"
-                        }`}
-                      >
-                        {title}
-                      </Link>
-                      <div className="mt-3">
-                        {items.map(({ path, name }) => {
-                          return (
-                            <div
-                              key={path}
-                              className={`text-[15px] mt-3 font-medium transition duration-200 hover:text-[#FF6C00] cursor-pointer hover:scale-105 transform hover:translate-x-3 ${
-                                location.pathname.split("/")[3] ===
-                                path.split("/")[1]
-                                  ? "text-[#FF6C00] translate-x-3"
-                                  : "text-gray-700 translate-x-0"
-                              }`}
-                            >
-                              <Link
-                                href={
-                                  "/shop-now/" +
-                                  title.toLowerCase().replace(/&/g, "and").replace(/\s+/g, "-") +
-                                  path
-                                }
-                              >
-                                <p>{name}</p>
-                              </Link>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  );
-                })}
+            <div className="flex items-center gap-3">
+              <Link
+                href={"/shop-now"}
+                onMouseOver={() => setShopNow(true)}
+                className="navberLinks cursor-default cursor-pointer flex items-center gap-0.5"
+              >
+                Shop Now
+                <Image
+                  alt="star"
+                  width={10}
+                  height={10}
+                  src={`data:image/svg+xml,%3csvg%20width='12'%20height='12'%20viewBox='0%200%2012%2012'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6%200L7.69706%204.30294L12%206L7.69706%207.69706L6%2012L4.30294%207.69706L0%206L4.30294%204.30294L6%200Z'%20fill='black'%20fill-opacity='0.4'/%3e%3c/svg%3e`}
+                />
+              </Link>
+              <div onClick={() => setShopNow(true)} className="text-lg lg:text-xl font-medium">
+                <MdOutlineKeyboardArrowDown />
               </div>
-            </div>}
+            </div>
+
+            {showNow && (
+              <div
+                onMouseLeave={() => setShopNow(false)}
+                className=" fixed z-40 shadow-lg lg:w-4xl md:w-3xl w-full xl:w-5xl top-[8%] font-lexend text-[15px] left-[50%] -translate-x-[50%]"
+              >
+                <div className="px-3 py-4 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5  rounded-lg bg-[#FFFAF3] text-gray-700">
+                  <div
+                    onClick={() => setShopNow(false)}
+                    className="text-xl cursor-pointer z-30 absolute top-3 right-3"
+                  >
+                    <IoClose />
+                  </div>
+                  {shopMenu.map(({ id, title, items }) => {
+                    return (
+                      <div key={id} className="relative">
+                        <Link
+                          href={
+                            "/shop-now/" +
+                            title
+                              .toLowerCase()
+                              .replace(/&/g, "and")
+                              .replace(/\s+/g, "-")
+                          }
+                          className={`py-2 hover:text-[#FF6C00] rounded-[6px] text-lg font-semibold  ${
+                            location.pathname.split("/")[2] ===
+                            title
+                              .toLowerCase()
+                              .replace(/&/g, "and")
+                              .replace(/\s+/g, "-")
+                              ? " text-[#FF6C00]"
+                              : "  text-gray-700"
+                          }`}
+                        >
+                          {title}
+                        </Link>
+                        <div className="mt-3">
+                          {items.map(({ path, name }) => {
+                            return (
+                              <div
+                                key={path}
+                                className={`text-[15px] mt-3 font-medium transition duration-200 hover:text-[#FF6C00] cursor-pointer hover:scale-105 transform hover:translate-x-3 ${
+                                  location.pathname.split("/")[3] ===
+                                  path.split("/")[1]
+                                    ? "text-[#FF6C00] translate-x-3"
+                                    : "text-gray-700 translate-x-0"
+                                }`}
+                              >
+                                <Link
+                                  href={
+                                    "/shop-now/" +
+                                    title
+                                      .toLowerCase()
+                                      .replace(/&/g, "and")
+                                      .replace(/\s+/g, "-") +
+                                    path
+                                  }
+                                >
+                                  <p>{name}</p>
+                                </Link>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
           <Link
             href={"/deals"}
@@ -250,9 +279,7 @@ function Navber() {
           >
             <IoCartSharp className="font-semibold text-lg md:text-xl " />
             <div className=" absolute font-medium -top-1 -right-1 bg-red-500  rounded-full w-4 h-4 text-white flex items-center justify-center text-[15px]">
-                {
-                  cartProduct.length
-                }
+              {cartProduct.length}
             </div>
           </Link>
         </div>

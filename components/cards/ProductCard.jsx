@@ -1,5 +1,9 @@
 "use client";
-import { alertMessageState, cartProductState, viewProductState } from "@/toolkit/slice";
+import {
+  alertMessageState,
+  cartProductState,
+  viewProductState,
+} from "@/toolkit/slice";
 import Image from "next/image";
 import React, { use, useEffect } from "react";
 import { FaRegHeart } from "react-icons/fa";
@@ -24,7 +28,7 @@ function ProductCard({ discount, price, title, img, ProductId }) {
         <div
           onClick={() => {
             dispath(cartProductState(ProductId));
-            dispath(alertMessageState('Successfuly Added To Your Cart'))
+            dispath(alertMessageState("Successfuly Added To Your Cart"));
           }}
           className="addToCart absolute bottom-1.5 z-30 left-[50%] -translate-x-[50%]"
         >

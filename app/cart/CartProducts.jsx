@@ -30,14 +30,14 @@ function CartProducts() {
   useEffect(() => {
     priceTrack();
   }, [cartProduct]);
-  return (
+  return cartProduct.length > 0 ? (
     <div className="w-full h-full">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div className="">
           <h3 className="text-xl flex items-center gap-4 font-semibold text-slate-900">
             Your Cart{" "}
             <span className="text-[15px] text-blue-400">
-              (If you order up to 10000 you can get 20% discount)
+              (If you order up to 10000 you can get 10% discount)
             </span>
           </h3>
           <div className="bg-gray-100 p-6 rounded-md mt-6">
@@ -63,8 +63,13 @@ function CartProducts() {
                         </div>
                         <div className="flex flex-col justify-between items-end gap-4">
                           <div className="flex items-center gap-3">
-                            <div className="cursor-pointer text-xl text-gray-500" onClick={() => dispatch(viewProductState(product))}>
-                              <IoMdEye/>
+                            <div
+                              className="cursor-pointer text-xl text-gray-500"
+                              onClick={() =>
+                                dispatch(viewProductState(product))
+                              }
+                            >
+                              <IoMdEye />
                             </div>
                             <div
                               onClick={() =>
@@ -232,8 +237,8 @@ function CartProducts() {
               Discount{" "}
               <span className="ml-auto font-semibold text-slate-900">
                 {Math.floor(
-                  totalPrice < 500
-                    ? 5
+                  totalPrice < 1000  
+                    ? 3
                     : totalPrice > 1000 && totalPrice < 10000
                       ? 8
                       : totalPrice > 10000
@@ -278,6 +283,10 @@ function CartProducts() {
           </button>
         </form>
       </div>
+    </div>
+  ) : (
+    <div className="text-center mt-12 ">
+      <h1 className="text-3xl font-bold text-black">No Item in Your Cart</h1>
     </div>
   );
 }
