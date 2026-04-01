@@ -43,9 +43,9 @@ function CartProducts() {
           <div className="bg-gray-100 p-6 rounded-md mt-6">
             <div className="space-y-4">
               <div>
-                {[...cartProduct].reverse().map((product) => {
+                {[...cartProduct].reverse().map((product, idx) => {
                   return (
-                    <div className="flex border px-3 py-3 rounded-lg border-gray-400 gap-4 mt-3 max-sm:flex-col">
+                    <div key={idx} className="flex border px-3 py-3 rounded-lg border-gray-400 gap-4 mt-3 max-sm:flex-col">
                       <div className="w-24 h-24 shrink-0 bg-white p-2 rounded-md">
                         <img
                           src={product.images[0]}

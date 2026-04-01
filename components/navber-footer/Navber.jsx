@@ -8,6 +8,7 @@ import { IoCartSharp } from "react-icons/io5";
 import logo from "@/public/images/logo.svg";
 import { useSelector } from "react-redux";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { IoMdMenu } from "react-icons/io";
 
 function Navber() {
   const [scroll, setScroll] = useState(0);
@@ -93,6 +94,7 @@ function Navber() {
   ];
   const [showNow, setShopNow] = useState(false);
   const cartProduct = useSelector((state) => state.cartProduct);
+  const [toggleNav, setToggleNav] = useState(false);
   return (
     <div
       className={` w-[100%]  h-20  rounded-b-lg z-40 fixed  ${scroll > 0 && " nav-animation  top-0 left-0"}`}
@@ -104,8 +106,21 @@ function Navber() {
           <Image alt="logo" width={"100%"} height={"100%"} src={logo} />
         </Link>
         {/* nav links */}
-        <nav className=" lg:static top-0 left-0 z-50 fixed bg-white w-screen h-screen lg:h-auto lg:w-auto lg:flex items-center space-y-4 px-8 py-8 lg:gap-8 justify-between">
-          <Link href={"/"} className="navberLinks flex items-center gap-0.5">
+        <nav
+          className={`lg:static top-0 left-0 z-50 fixed lg:bg-transparent transition duration-300 bg-white w-screen h-screen lg:h-auto lg:w-auto lg:flex items-center lg:space-y-0 space-y-4 px-8 py-8 lg:gap-8 justify-between ${toggleNav ? "translate-x-0" : "-translate-x-[100%] lg:translate-x-0"}`}
+        >
+          <IoClose
+            onClick={() => setToggleNav(false)}
+            className="lg:hidden absolute top-5 right-5 text-xl"
+          />
+          <Link
+            onClick={() => {
+              setToggleNav(false);
+              setShopNow(false);
+            }}
+            href={"/"}
+            className="navberLinks flex items-center gap-0.5"
+          >
             Home
             <Image
               alt="star"
@@ -114,9 +129,13 @@ function Navber() {
               src={`data:image/svg+xml,%3csvg%20width='12'%20height='12'%20viewBox='0%200%2012%2012'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6%200L7.69706%204.30294L12%206L7.69706%207.69706L6%2012L4.30294%207.69706L0%206L4.30294%204.30294L6%200Z'%20fill='black'%20fill-opacity='0.4'/%3e%3c/svg%3e`}
             />
           </Link>
-          <div className=" relative">
+          <div className="relative">
             <div className="flex items-center gap-3">
               <Link
+                onClick={() => {
+                  setToggleNav(false);
+                  setShopNow(false);
+                }}
                 href={"/shop-now"}
                 onMouseOver={() => setShopNow(true)}
                 className="navberLinks cursor-default cursor-pointer flex items-center gap-0.5"
@@ -129,7 +148,10 @@ function Navber() {
                   src={`data:image/svg+xml,%3csvg%20width='12'%20height='12'%20viewBox='0%200%2012%2012'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6%200L7.69706%204.30294L12%206L7.69706%207.69706L6%2012L4.30294%207.69706L0%206L4.30294%204.30294L6%200Z'%20fill='black'%20fill-opacity='0.4'/%3e%3c/svg%3e`}
                 />
               </Link>
-              <div onClick={() => setShopNow(true)} className="text-lg lg:text-xl font-medium">
+              <div
+                onClick={() => setShopNow(true)}
+                className="text-lg lg:text-xl font-medium"
+              >
                 <MdOutlineKeyboardArrowDown />
               </div>
             </div>
@@ -137,12 +159,12 @@ function Navber() {
             {showNow && (
               <div
                 onMouseLeave={() => setShopNow(false)}
-                className=" fixed z-40 shadow-lg lg:w-4xl md:w-3xl w-full xl:w-5xl top-[8%] font-lexend text-[15px] left-[50%] -translate-x-[50%]"
+                className=" fixed z-40 shadow-lg lg:w-4xl md:w-3xl w-full xl:w-5xl top-full font-lexend text-[15px] left-[50%] -translate-x-[50%]"
               >
                 <div className="px-3 py-4 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5  rounded-lg bg-[#FFFAF3] text-gray-700">
                   <div
                     onClick={() => setShopNow(false)}
-                    className="text-xl cursor-pointer z-30 absolute top-3 right-3"
+                    className="text-xl  cursor-pointer z-30 absolute top-3 right-3"
                   >
                     <IoClose />
                   </div>
@@ -150,6 +172,10 @@ function Navber() {
                     return (
                       <div key={id} className="relative">
                         <Link
+                          onClick={() => {
+                            setToggleNav(false);
+                            setShopNow(false);
+                          }}
                           href={
                             "/shop-now/" +
                             title
@@ -182,6 +208,10 @@ function Navber() {
                                 }`}
                               >
                                 <Link
+                                  onClick={() => {
+                                    setToggleNav(false);
+                                    setShopNow(false);
+                                  }}
                                   href={
                                     "/shop-now/" +
                                     title
@@ -264,24 +294,30 @@ function Navber() {
               src={`data:image/svg+xml,%3csvg%20width='12'%20height='12'%20viewBox='0%200%2012%2012'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6%200L7.69706%204.30294L12%206L7.69706%207.69706L6%2012L4.30294%207.69706L0%206L4.30294%204.30294L6%200Z'%20fill='black'%20fill-opacity='0.4'/%3e%3c/svg%3e`}
             />
           </Link>
-          <div className="px-2 py-[7px] z-30 transition duration-300 hover:bg-[#feeb9d] rounded-full cursor-pointer text-gray-700">
+          <div className="px-1 md:px-2 py-[7px] z-30 transition duration-300 hover:bg-[#feeb9d] rounded-full cursor-pointer text-gray-700">
             <IoSearchOutline className="font-semibold text-lg md:text-xl " />
           </div>
           <Link
             href={"/favourite"}
-            className="px-2 py-[7px] z-30 transition duration-300 hover:bg-[#feeb9d] rounded-full cursor-pointer text-gray-700"
+            className="px-1 md:px-2 py-[7px] z-30 transition duration-300 hover:bg-[#feeb9d] rounded-full cursor-pointer text-gray-700"
           >
             <FaRegHeart className="font-semibold text-lg md:text-xl " />
           </Link>
           <Link
             href={"/cart"}
-            className="px-2 py-[7px] relative z-30 transition duration-300 hover:bg-[#feeb9d] rounded-full cursor-pointer text-gray-700"
+            className="px-1 md:px-2 py-[7px] relative z-30 transition duration-300 hover:bg-[#feeb9d] rounded-full cursor-pointer text-gray-700"
           >
             <IoCartSharp className="font-semibold text-lg md:text-xl " />
             <div className=" absolute font-medium -top-1 -right-1 bg-red-500  rounded-full w-4 h-4 text-white flex items-center justify-center text-[15px]">
               {cartProduct.length}
             </div>
           </Link>
+          <div
+            onClick={() => setToggleNav(true)}
+            className="ml-3 text-xl lg:hidden block"
+          >
+            <IoMdMenu />
+          </div>
         </div>
       </div>
     </div>
