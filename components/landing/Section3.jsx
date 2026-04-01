@@ -14,7 +14,7 @@ function Section3() {
           <div className=" w-full relative rounded-lg overflow-hidden">
             <Image src={womenPng} width={"100%"} height={"100%"} alt="" />
             <Link
-              href={"/women-collection"}
+              href={"/shop-now/fassion/womens-fassion"}
               className=" absolute z-30 bottom-5 left-8 transition duration-300 rounded-lg border border-black bg-white cursor-pointer md:text-[14px] text-[13px] lg:text-[15px] font-semibold"
             >
               <div className="button-borders ">
@@ -59,7 +59,7 @@ function Section3() {
               <div className=" lg:mt-0 mt-4 rounded-2xl relative overflow-hidden">
                 <Image src={manImg} alt="" width={"100%"} height={"100%"} />
                 <Link
-                  href={"/mans-collection"}
+                  href={"/shop-now/fassion/mens-fassion"}
                   className=" absolute z-30 bottom-5 left-8 transition duration-300 rounded-lg border border-black bg-white cursor-pointer md:text-[14px] text-[13px] lg:text-[15px] font-semibold"
                 >
                   <div className="button-borders ">

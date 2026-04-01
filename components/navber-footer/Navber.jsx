@@ -159,7 +159,7 @@ function Navber() {
             {showNow && (
               <div
                 onMouseLeave={() => setShopNow(false)}
-                className=" fixed z-40 shadow-lg lg:w-4xl md:w-3xl w-full xl:w-5xl top-full font-lexend text-[15px] left-[50%] -translate-x-[50%]"
+                className=" fixed z-40 shadow-lg lg:w-4xl md:w-3xl w-full xl:w-5xl top-0 lg:top-full font-lexend text-[15px] left-[50%] -translate-x-[50%]"
               >
                 <div className="px-3 py-4 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5  rounded-lg bg-[#FFFAF3] text-gray-700">
                   <div
@@ -170,7 +170,7 @@ function Navber() {
                   </div>
                   {shopMenu.map(({ id, title, items }) => {
                     return (
-                      <div key={id} className="relative">
+                      <div key={id} className="relative px-1 py-1 lg:px-0 lg:py-0">
                         <Link
                           onClick={() => {
                             setToggleNav(false);
@@ -183,7 +183,7 @@ function Navber() {
                               .replace(/&/g, "and")
                               .replace(/\s+/g, "-")
                           }
-                          className={`py-2 hover:text-[#FF6C00] rounded-[6px] text-lg font-semibold  ${
+                          className={`py-2 hover:text-[#FF6C00] rounded-[6px] text-[16px] lg:text-lg font-semibold  ${
                             location.pathname.split("/")[2] ===
                             title
                               .toLowerCase()
@@ -195,12 +195,12 @@ function Navber() {
                         >
                           {title}
                         </Link>
-                        <div className="mt-3">
+                        <div className="mt-1 lg:mt-3">
                           {items.map(({ path, name }) => {
                             return (
                               <div
                                 key={path}
-                                className={`text-[15px] mt-3 font-medium transition duration-200 hover:text-[#FF6C00] cursor-pointer hover:scale-105 transform hover:translate-x-3 ${
+                                className={`text-[14px] lg:text-[15px] mt-1 lg:mt-3 font-medium transition duration-200 hover:text-[#FF6C00] cursor-pointer hover:scale-105 transform hover:translate-x-3 ${
                                   location.pathname.split("/")[3] ===
                                   path.split("/")[1]
                                     ? "text-[#FF6C00] translate-x-3"
