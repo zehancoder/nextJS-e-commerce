@@ -6,6 +6,7 @@ import SmoothScroll from "@/components/smoothScroll/SmoothScroll";
 import Footer from "@/components/navber-footer/Footer";
 import Overlay from "@/components/overlayDiv/Overlay";
 import ViewProduct from "@/components/productView/ViewProduct";
+import Alert from "@/components/alert/Alert";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,8 +35,9 @@ export default function RootLayout({ children }) {
           <div className="h-20" />
           {children}
           <Overlay />
-          <ViewProduct/>
+          <ViewProduct />
           <Footer />
+          <Alert />
         </ReduxProvider>
       </body>
     </html>

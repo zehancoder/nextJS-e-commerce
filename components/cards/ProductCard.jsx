@@ -1,16 +1,17 @@
 "use client";
-import { viewProductState } from "@/toolkit/slice";
+import { alertMessageState, cartProductState, viewProductState } from "@/toolkit/slice";
 import Image from "next/image";
-import React from "react";
+import React, { use, useEffect } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import "react-loading-skeleton/dist/skeleton.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 function ProductCard({ discount, price, title, img, ProductId }) {
   const dispath = useDispatch();
-  
+  const cartProduct = useSelector((state) => state.cartProduct);
+
   return (
     <div className=" relative font-mono py-4 h-full productOverlay">
       <div className=" absolute top-3 z-20 left-3 rounded-full bg-white px-2.5 py-1 text-[12px] font-semibold">
@@ -20,7 +21,13 @@ function ProductCard({ discount, price, title, img, ProductId }) {
         <div className="productImg  transition duration-500 brightness-90">
           <Image alt="" src={img} height={300} width={350} />
         </div>
-        <div className="  addToCart absolute bottom-1.5 z-30 left-[50%] -translate-x-[50%]">
+        <div
+          onClick={() => {
+            dispath(cartProductState(ProductId));
+            dispath(alertMessageState('Successfuly Added To Your Cart'))
+          }}
+          className="addToCart absolute bottom-1.5 z-30 left-[50%] -translate-x-[50%]"
+        >
           <div className="button-borders ">
             <button className="primary-button">Add To Cart</button>
           </div>
@@ -50,7 +57,9 @@ function ProductCard({ discount, price, title, img, ProductId }) {
         <h1 className=" md:text-[16px] leading-5 w-[90%] text-[15px] font-semibold lg:text-lg">
           {title}
         </h1>
-        <p className=" md:text-[17px] sm2:text-base text-[15px] lg:text-lg font-semibold">${price}</p>
+        <p className=" md:text-[17px] sm2:text-base text-[15px] lg:text-lg font-semibold">
+          ${price}
+        </p>
       </div>
     </div>
   );

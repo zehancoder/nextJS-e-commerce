@@ -92,7 +92,7 @@ function Products() {
                     title={product.title}
                     img={product.images[0]}
                     discount={3}
-                    ProductId={product.id}
+                    ProductId={product}
                   />
                 </div>
               );

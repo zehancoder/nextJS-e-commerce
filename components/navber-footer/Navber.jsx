@@ -6,6 +6,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
 import { IoCartSharp } from "react-icons/io5";
 import logo from "@/public/images/logo.svg";
+import { useSelector } from "react-redux";
 function Navber() {
   const [scroll, setScroll] = useState(0);
   //
@@ -89,7 +90,7 @@ function Navber() {
     },
   ];
   const [showNow, setShopNow] = useState(false)
-
+  const cartProduct = useSelector(state => state.cartProduct)
   return (
     <div
       className={` w-[100%]  h-20  rounded-b-lg z-40 fixed  ${scroll > 0 && " nav-animation  top-0 left-0"}`}
@@ -245,9 +246,14 @@ function Navber() {
           </Link>
           <Link
             href={"/cart"}
-            className="px-2 py-[7px] z-30 transition duration-300 hover:bg-[#feeb9d] rounded-full cursor-pointer text-gray-700"
+            className="px-2 py-[7px] relative z-30 transition duration-300 hover:bg-[#feeb9d] rounded-full cursor-pointer text-gray-700"
           >
             <IoCartSharp className="font-semibold text-lg md:text-xl " />
+            <div className=" absolute font-medium -top-1 -right-1 bg-red-500  rounded-full w-4 h-4 text-white flex items-center justify-center text-[15px]">
+                {
+                  cartProduct.length
+                }
+            </div>
           </Link>
         </div>
       </div>

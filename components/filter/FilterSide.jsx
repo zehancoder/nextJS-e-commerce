@@ -31,7 +31,7 @@ function FilterSide({
   const filterbyCategory = useSelector((state) => state.selectedCategory);
 
   return (
-    <div className="w-full  font-monserrat">
+    <div className="w-full bg-white font-monserrat">
       <div className="">
         <div className="w-full flex items-center justify-between bg-[#FBBB00]  py-3 px-5 rounded-tl-lg rounded-tr-lg">
           <p className="text-[15px] md:text-[17px] font-alan font-semibold text-white uppercase">

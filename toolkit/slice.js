@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   viewProduct: null,
@@ -10,6 +10,7 @@ const initialState = {
   },
   products: [],
   cartProduct: [],
+  alertMessage: ''
 };
 
 export const reduxSlice = createSlice({
@@ -18,7 +19,7 @@ export const reduxSlice = createSlice({
   reducers: {
     // view product state
     viewProductState: (state, action) => {
-      state.viewProduct = action.payload;      
+      state.viewProduct = action.payload;
     },
     // populer data state
     populerDataState: (state, action) => {
@@ -40,7 +41,42 @@ export const reduxSlice = createSlice({
     },
     // cart product state
     cartProductState: (state, action) => {
-      state.cartProduct.push(action.payload);
+      if (action.payload) {
+        state.cartProduct = state.cartProduct.filter((item) => {
+          return item.id !== action.payload.id;
+        });
+        state.cartProduct.push({ ...action.payload, quantity: 1 });
+      }
+    },
+    // remove data from cart
+    removeFromCartState: (state, action) => {
+      state.cartProduct = state.cartProduct.filter((product) => {
+        return product.id !== action.payload.id
+      });
+    },
+    // update product quantity
+    increaseProductQuantity: (state, action) => {
+      state.cartProduct = state.cartProduct.map((product) => {
+        if (action.payload.id === product.id) {
+          product.quantity = product.quantity + 1;
+        }
+        return product;
+      });
+    },
+    decreaseProductQuantity: (state, action) => {
+      state.cartProduct = state.cartProduct.map((product) => {
+        if (action.payload.id === product.id) {
+          if (product.quantity > 1) {
+            product.quantity = product.quantity - 1;
+          }
+        }
+        return product;
+      });
+    },
+    /// set alert messages
+    alertMessageState: (state, action) => {
+      state.alertMessage = action.payload;
+     
     }
   },
 });
@@ -52,6 +88,11 @@ export const {
   selectedCategoryState,
   lowPriceState,
   hightPriceState,
-  productsSaveState
+  productsSaveState,
+  cartProductState,
+  increaseProductQuantity,
+  decreaseProductQuantity,
+  alertMessageState,
+  removeFromCartState
 } = reduxSlice.actions;
 export default reduxSlice.reducer;

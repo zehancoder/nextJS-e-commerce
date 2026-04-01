@@ -2,9 +2,16 @@ import React from "react";
 import fetchProduct from "@/components/landing/apis/dummy";
 import CardSkeleton from "@/components/cards/SkeletonCard";
 import ProductCard from "@/components/cards/ProductCard";
+export async function generateMetadata({ params }) {
+  const data = await params;
+  return {
+    title: `Product ${data.subCategory}`,
+  };
+}
 async function page({ params }) {
   const { subCategory, category } = await params;
   let data = [];
+  // data fetching by subcategory
   switch (subCategory) {
     case "smartphones-tablet":
       const phones = await fetchProduct("smartphones");
@@ -64,7 +71,10 @@ async function page({ params }) {
       fetchProduct("home-decoration"),
     ]);
     data = allFurniture.flatMap((res) => res.products);
-  } else if (category === "beauty-and-personal-care" || category === "baby-and-toys") {
+  } else if (
+    category === "beauty-and-personal-care" ||
+    category === "baby-and-toys"
+  ) {
     const allData = await Promise.all([
       fetchProduct("skincare"),
       fetchProduct("fragrances"),
@@ -95,7 +105,7 @@ async function page({ params }) {
                         title={product.title}
                         img={product.images[0]}
                         discount={3}
-                        ProductId={product.id}
+                        ProductId={product}
                       />
                     </div>
                   );
